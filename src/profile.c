@@ -30,7 +30,7 @@ void printReadIt(RedisModuleCtx *ctx, IndexIterator *root, size_t counter, doubl
   if (PROFILE_VERBOSE) {
       RedisModule_ReplyWithLongDouble(ctx, cpuTime);
   }
-  RedisModule_ReplyWithLongLong(ctx, counter);
+  RedisModule_ReplyWithLongLong(ctx, counter - 1);
 }
 
 static double _recursiveProfilePrint(RedisModuleCtx *ctx, ResultProcessor *rp, size_t *arrlen) {
@@ -70,7 +70,7 @@ static double _recursiveProfilePrint(RedisModuleCtx *ctx, ResultProcessor *rp, s
   if (PROFILE_VERBOSE)
       RedisModule_ReplyWithDouble(ctx, totalRPTime - upstreamTime);
   ++(*arrlen);
-  RedisModule_ReplyWithLongLong(ctx, RPProfile_GetCount(rp));
+  RedisModule_ReplyWithLongLong(ctx, RPProfile_GetCount(rp) - 1);
   return totalRPTime;
 }
 
